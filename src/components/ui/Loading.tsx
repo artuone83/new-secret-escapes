@@ -1,1 +1,3 @@
-export const Loading = () => <div>Loading</div>;
+import { CircularProgress } from "@mui/material";
+
+export const Loading = () => <CircularProgress />;

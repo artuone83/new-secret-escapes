@@ -2,8 +2,11 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
-import App from "./App";
-import { API_URL } from "./services";
+import { CssBaseline } from "@mui/material";
+import { ThemeProvider } from "@mui/material/styles";
+import { theme } from "theme";
+import { App } from "App";
+import { API_URL } from "./services/escapesApi";
 
 const client = new ApolloClient({
   uri: API_URL,
@@ -17,7 +20,10 @@ root.render(
   <React.StrictMode>
     <BrowserRouter>
       <ApolloProvider client={client}>
-        <App />
+        <ThemeProvider theme={theme}>
+          <CssBaseline />
+          <App />
+        </ThemeProvider>
       </ApolloProvider>
     </BrowserRouter>
   </React.StrictMode>

@@ -6,6 +6,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 Publicly available:
 [here](https://melodious-sunburst-c5f722.netlify.app/)
+
 ## Available Scripts
 
 In the project directory, you can run:
@@ -38,4 +39,13 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 **Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
 ### `npm run lint`
+
+Finds and list problems with your JavaScript code.
+
 ### `npm run format`
+
+Formats code with Prettier.
+
+### `npm run generate-types`
+
+Generates TypeScript Types From GraphQL schema to `src/types/graphql-types.ts` file.

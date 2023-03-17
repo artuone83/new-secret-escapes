@@ -1,1 +1,1 @@
-export const API_URL = "https://staging.sparrow.escapes.tech/graphql/";
+export const API_URL = "https://staging.sparrow.escapes.tech/graphql";

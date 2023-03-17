@@ -1,7 +1,5 @@
-import { Root } from "./router/Root";
+import { Root } from "router";
 
-const App = () => {
+export const App = () => {
   return <Root />;
 };
-
-export default App;
