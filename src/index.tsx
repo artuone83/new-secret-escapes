@@ -6,7 +6,7 @@ import { CssBaseline } from "@mui/material";
 import { ThemeProvider } from "@mui/material/styles";
 import { theme } from "theme";
 import { App } from "App";
-import { API_URL } from "./services/escapesApi";
+import { API_URL } from "services";
 
 const client = new ApolloClient({
   uri: API_URL,
