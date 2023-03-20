@@ -8,9 +8,9 @@ Publicly available:
 [here](https://melodious-sunburst-c5f722.netlify.app/)
 
 ## About
-This simple single page application allows to search for a holiday and view some basic details about it
+This simple single page application allows to search for a holiday and view some basic details about it.
 
-Application contains three pages
+Application contains three pages:
 - Home (search location)
 - Results (A list of results that match the search performed, and link through to the details page)
 - Details (more rich information about selected hotel/sale)

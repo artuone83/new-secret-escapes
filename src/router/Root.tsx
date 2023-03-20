@@ -1,8 +1,9 @@
+import { FC } from "react";
 import { Routes, Route } from "react-router-dom";
 import { HomePage, ResultsPage, DetailsPage, NoMatchPage } from "pages";
 import { Layout } from "components";
 
-export const Root = () => {
+export const Root: FC = () => {
   return (
     <Routes>
       <Route path="/" element={<Layout />}>

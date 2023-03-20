@@ -24,7 +24,9 @@ interface MainMediaCardProps extends Partial<Sale> {
 const DefaultActions: FC<{ id: string }> = ({ id }) => {
   return (
     <>
-      <Button size="small">Share</Button>
+      <Button size="small" disabled>
+        Share
+      </Button>
       <Button size="small">
         <Link to={`/sale/${id}`}>Learn More</Link>
       </Button>

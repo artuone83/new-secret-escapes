@@ -1,21 +1,47 @@
 import { FC } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useSearchParams } from "react-router-dom";
 import { Box } from "@mui/material";
-import { GoBackButton, MainHeading, MediaCard, NoResult } from "components";
+import {
+  ApolloQueryError,
+  GoBackButton,
+  Loading,
+  MainHeading,
+  MediaCard,
+  NoResult,
+} from "components";
 import { getPlural } from "utils";
-import { LocationState } from "features/search";
+import { DEFAULT_TRAVEL_TYPE, LocationState } from "features/search";
+import { useSaleSearchQuery } from "generated";
 
 export const Results: FC = () => {
   const { state }: { state: LocationState | null } = useLocation();
+  const [searchParams] = useSearchParams();
 
-  if (!state) {
+  const searchParamsQueryKeyValue = searchParams.get("query");
+
+  const { loading, error, data } = useSaleSearchQuery({
+    variables: {
+      query: searchParamsQueryKeyValue,
+      travelTypes: DEFAULT_TRAVEL_TYPE,
+    },
+    skip: Boolean(state) || !searchParamsQueryKeyValue,
+  });
+
+  if (loading) return <Loading />;
+  if (error) return <ApolloQueryError message={error.message} />;
+
+  if (!state && !data) {
     return null;
   }
 
-  const noResults = state.resultsList.length === 0;
-  const heading = `${state.resultCount} ${getPlural(
+  const salesFromData = data?.saleSearch?.sales;
+  const resultsCountFromData = data?.saleSearch?.resultCount;
+
+  const noResults =
+    state?.resultsList.length === 0 || salesFromData?.length === 0;
+  const heading = `${resultsCountFromData ?? state?.resultCount} ${getPlural(
     "deal",
-    state?.resultCount || 0
+    resultsCountFromData ?? state?.resultCount ?? 0
   )}`;
 
   return (
@@ -27,12 +53,9 @@ export const Results: FC = () => {
             display: "flex",
             flexWrap: "wrap",
             gap: 3,
-            "div.MuiPaper-root:last-child": {
-              flex: 0,
-            },
           }}
         >
-          {state?.resultsList.map((sale) => (
+          {(salesFromData ?? state?.resultsList)?.map((sale) => (
             <MediaCard
               key={sale?.id}
               id={sale?.id || ""}

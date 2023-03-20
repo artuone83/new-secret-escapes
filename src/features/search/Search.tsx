@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { ChangeEvent, FC, FormEvent, useState } from "react";
 import { Box, Button, TextField } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { ApolloQueryError, Loading } from "components";
@@ -9,7 +9,7 @@ export interface LocationState {
   resultCount: Maybe<number> | undefined;
 }
 
-const DEFAULT_TRAVEL_TYPE = "HOTEL_ONLY";
+export const DEFAULT_TRAVEL_TYPE = "HOTEL_ONLY";
 
 export const Search: FC = () => {
   const [search, setSearch] = useState("");
@@ -34,11 +34,17 @@ export const Search: FC = () => {
     },
   });
 
-  const onFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const onFormSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (search) {
       setFetchData(true);
     }
+  };
+
+  const onSearchChange = (
+    e: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
+  ) => {
+    setSearch(e.target.value);
   };
 
   return (
@@ -52,13 +58,7 @@ export const Search: FC = () => {
             type="search"
             value={search}
             fullWidth
-            onChange={(e) => {
-              setSearch(e.target.value);
-
-              if (fetchData) {
-                setFetchData(false);
-              }
-            }}
+            onChange={onSearchChange}
           />
           <Button
             type="submit"
