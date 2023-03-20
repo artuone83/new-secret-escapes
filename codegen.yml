@@ -1,4 +1,5 @@
 schema: https://staging.sparrow.escapes.tech/graphql
+documents: ./src/**/*.{ts,tsx}
 generates:
   ./src/types/graphql-types.ts:
     plugins:

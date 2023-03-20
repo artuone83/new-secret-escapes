@@ -1,4 +1,5 @@
 import { gql } from "@apollo/client";
+import * as Apollo from "@apollo/client";
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = {
@@ -10,6 +11,7 @@ export type MakeOptional<T, K extends keyof T> = Omit<T, K> & {
 export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & {
   [SubKey in K]: Maybe<T[SubKey]>;
 };
+const defaultOptions = {} as const;
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: string;
@@ -1321,3 +1323,189 @@ export type UpcomingSalesResultsSalesArgs = {
   limit?: InputMaybe<Scalars["Int"]>;
   offset?: InputMaybe<Scalars["Int"]>;
 };
+
+export type SaleDetailsQueryVariables = Exact<{
+  saleId: Scalars["String"];
+}>;
+
+export type SaleDetailsQuery = {
+  __typename?: "Query";
+  sale?: {
+    __typename?: "Sale";
+    editorial?: {
+      __typename?: "SaleEditorial";
+      title?: string | null;
+      destinationName?: string | null;
+      hotelDetails?: string | null;
+    } | null;
+    prices?: {
+      __typename?: "Prices";
+      leadRate?: { __typename?: "Price"; forDisplay?: string | null } | null;
+    } | null;
+    photos?: Array<{ __typename?: "Photo"; url?: string | null } | null> | null;
+  } | null;
+};
+
+export type SaleSearchQueryVariables = Exact<{
+  query?: InputMaybe<Scalars["String"]>;
+  travelTypes?: InputMaybe<
+    Array<InputMaybe<Scalars["String"]>> | InputMaybe<Scalars["String"]>
+  >;
+}>;
+
+export type SaleSearchQuery = {
+  __typename?: "Query";
+  saleSearch?: {
+    __typename?: "SearchResults";
+    resultCount?: number | null;
+    sales?: Array<{
+      __typename?: "Sale";
+      id: string;
+      editorial?: {
+        __typename?: "SaleEditorial";
+        title?: string | null;
+        destinationName?: string | null;
+      } | null;
+      photos?: Array<{
+        __typename?: "Photo";
+        url?: string | null;
+      } | null> | null;
+    } | null> | null;
+  } | null;
+};
+
+export const SaleDetailsDocument = gql`
+  query SaleDetails($saleId: String!) {
+    sale(saleId: $saleId) {
+      editorial {
+        title
+        destinationName
+        hotelDetails
+      }
+      prices {
+        leadRate {
+          forDisplay
+        }
+      }
+      photos {
+        url
+      }
+    }
+  }
+`;
+
+/**
+ * __useSaleDetailsQuery__
+ *
+ * To run a query within a React component, call `useSaleDetailsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useSaleDetailsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useSaleDetailsQuery({
+ *   variables: {
+ *      saleId: // value for 'saleId'
+ *   },
+ * });
+ */
+export function useSaleDetailsQuery(
+  baseOptions: Apollo.QueryHookOptions<
+    SaleDetailsQuery,
+    SaleDetailsQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<SaleDetailsQuery, SaleDetailsQueryVariables>(
+    SaleDetailsDocument,
+    options
+  );
+}
+export function useSaleDetailsLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    SaleDetailsQuery,
+    SaleDetailsQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<SaleDetailsQuery, SaleDetailsQueryVariables>(
+    SaleDetailsDocument,
+    options
+  );
+}
+export type SaleDetailsQueryHookResult = ReturnType<typeof useSaleDetailsQuery>;
+export type SaleDetailsLazyQueryHookResult = ReturnType<
+  typeof useSaleDetailsLazyQuery
+>;
+export type SaleDetailsQueryResult = Apollo.QueryResult<
+  SaleDetailsQuery,
+  SaleDetailsQueryVariables
+>;
+export const SaleSearchDocument = gql`
+  query SaleSearch($query: String, $travelTypes: [String]) {
+    saleSearch(query: $query, travelTypes: $travelTypes) {
+      resultCount
+      sales(limit: 10, offset: 0) {
+        id
+        editorial {
+          title
+          destinationName
+        }
+        photos {
+          url
+        }
+      }
+    }
+  }
+`;
+
+/**
+ * __useSaleSearchQuery__
+ *
+ * To run a query within a React component, call `useSaleSearchQuery` and pass it any options that fit your needs.
+ * When your component renders, `useSaleSearchQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useSaleSearchQuery({
+ *   variables: {
+ *      query: // value for 'query'
+ *      travelTypes: // value for 'travelTypes'
+ *   },
+ * });
+ */
+export function useSaleSearchQuery(
+  baseOptions?: Apollo.QueryHookOptions<
+    SaleSearchQuery,
+    SaleSearchQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<SaleSearchQuery, SaleSearchQueryVariables>(
+    SaleSearchDocument,
+    options
+  );
+}
+export function useSaleSearchLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    SaleSearchQuery,
+    SaleSearchQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<SaleSearchQuery, SaleSearchQueryVariables>(
+    SaleSearchDocument,
+    options
+  );
+}
+export type SaleSearchQueryHookResult = ReturnType<typeof useSaleSearchQuery>;
+export type SaleSearchLazyQueryHookResult = ReturnType<
+  typeof useSaleSearchLazyQuery
+>;
+export type SaleSearchQueryResult = Apollo.QueryResult<
+  SaleSearchQuery,
+  SaleSearchQueryVariables
+>;
