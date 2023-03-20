@@ -9,7 +9,7 @@ import {
   Box,
 } from "@mui/material";
 import { Link } from "react-router-dom";
-import { Sale } from "types";
+import { Sale } from "generated";
 
 interface MainMediaCardProps extends Partial<Sale> {
   fullWidth?: boolean;

@@ -79,7 +79,7 @@ Formats code with Prettier.
 
 ### `npm run codegen`
 
-Generates TypeScript Types From GraphQL schema to `src/types/graphql-types.ts` file.
+Generates TypeScript Types From GraphQL schema to `src/generated/graphql.ts` file.
 
 
 [React]: <https://react.dev/>

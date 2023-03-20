@@ -1,9 +1,13 @@
 schema: https://staging.sparrow.escapes.tech/graphql
-documents: ./src/**/*.{ts,tsx}
+documents: ./src/queries/**/*.{ts,tsx}
 generates:
-  ./src/types/graphql-types.ts:
+  ./src/generated/graphql.ts:
+    hooks:
+      afterOneFileWrite:
+        - prettier --write
+      afterAllFileWrite:
+        - eslint --fix
     plugins:
       - typescript
       - typescript-operations
       - typescript-react-apollo
-      

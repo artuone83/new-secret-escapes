@@ -28,23 +28,10 @@ export const Layout: FC = () => {
         </Container>
       </Box>
 
-      <Box component="main" sx={{ flex: 1 }}>
+      <Box component="main" sx={{ flex: 1, paddingBottom: 3 }}>
         <Container>
           <Outlet />
         </Container>
-      </Box>
-
-      <Box
-        component="footer"
-        sx={{
-          backgroundColor: "#000000",
-          minHeight: "75px",
-          color: "lightGray",
-          display: "flex",
-          alignItems: "center",
-        }}
-      >
-        <Container>Footer</Container>
       </Box>
     </Box>
   );

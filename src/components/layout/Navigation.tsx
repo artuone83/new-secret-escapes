@@ -1,5 +1,5 @@
-import { Box } from "@mui/material";
 import { FC } from "react";
+import { Box, Button, styled } from "@mui/material";
 import { NavLink } from "react-router-dom";
 
 export const Navigation: FC = () => {
@@ -7,9 +7,27 @@ export const Navigation: FC = () => {
     <Box component="nav">
       <Box component="ul" sx={{ padding: 0, margin: 0 }}>
         <Box component="li" sx={{ listStyleType: "none" }}>
-          <NavLink to="/">Home</NavLink>
+          <NavLinkStyled to="/">
+            <Button variant="contained">Home</Button>
+          </NavLinkStyled>
         </Box>
       </Box>
     </Box>
   );
 };
+
+const NavLinkStyled = styled(NavLink)`
+  text-decoration: none;
+
+  &:visited {
+    text-decoration: none;
+  }
+
+  &:hover {
+    text-decoration: none;
+  }
+
+  &:active {
+    text-decoration: none;
+  }
+`;

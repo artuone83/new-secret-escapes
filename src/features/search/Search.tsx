@@ -1,40 +1,26 @@
 import { FC, useState } from "react";
 import { Box, Button, TextField } from "@mui/material";
-import { useQuery, gql } from "@apollo/client";
 import { useNavigate } from "react-router-dom";
 import { ApolloQueryError, Loading } from "components";
-import { Maybe, Query, Sale } from "types";
-
-const GET_SALES = gql`
-  query SaleSearch($query: String, $travelTypes: [String]) {
-    saleSearch(query: $query, travelTypes: $travelTypes) {
-      resultCount
-      sales(limit: 10, offset: 0) {
-        id
-        editorial {
-          title
-          destinationName
-        }
-        photos {
-          url
-        }
-      }
-    }
-  }
-`;
+import { Maybe, Sale, useSaleSearchQuery } from "generated";
 
 export interface LocationState {
-  resultsList: Maybe<Sale>[];
+  resultsList: Maybe<Omit<Sale, "type">>[];
   resultCount: Maybe<number> | undefined;
 }
+
+const DEFAULT_TRAVEL_TYPE = "HOTEL_ONLY";
 
 export const Search: FC = () => {
   const [search, setSearch] = useState("");
   const [fetchData, setFetchData] = useState(false);
 
   const navigate = useNavigate();
-  const { loading, error } = useQuery<Pick<Query, "saleSearch">>(GET_SALES, {
-    variables: { query: search },
+  const { loading, error } = useSaleSearchQuery({
+    variables: {
+      query: search,
+      travelTypes: DEFAULT_TRAVEL_TYPE,
+    },
     skip: !fetchData,
     onCompleted: (data) => {
       const state: LocationState = {
