@@ -1,5 +1,5 @@
 {
-  "name": "holidays-details",
+  "name": "new-secret-escapes",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -29,7 +29,7 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
-    "generate-types": "graphql-codegen && prettier --write src/types/graphql-types.ts"
+    "codegen": "graphql-codegen && prettier --write src/types/graphql-types.ts"
   },
   "eslintConfig": {
     "extends": [

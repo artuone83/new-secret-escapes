@@ -7,6 +7,37 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 Publicly available:
 [here](https://melodious-sunburst-c5f722.netlify.app/)
 
+## About
+This simple single page application allows to search for a holiday and view some basic details about it
+
+Application contains three pages
+- Home (search location)
+- Results (A list of results that match the search performed, and link through to the details page)
+- Details (more rich information about selected hotel/sale)
+
+## Installation / Development
+
+This project  requires [Node.js](https://nodejs.org/).
+During the development process was used **Node v16.17.0**
+- clone this repository
+  `git clone https://github.com/artuone83/new-secret-escapes.git`
+- install dependencies
+  `npm install`
+- start local server
+  `npm start`
+## Technologies
+### Frontend
+- [React]
+- [Create React App]
+- [Typescript] ([React Typescript Cheatsheet])
+- [Apollo client]
+- [Graphql]
+- [Material UI]
+- [Codegen]
+  
+### Backend
+
+open API from `https://staging.sparrow.escapes.tech/graphql` (No Authorization Required)
 ## Available Scripts
 
 In the project directory, you can run:
@@ -46,6 +77,17 @@ Finds and list problems with your JavaScript code.
 
 Formats code with Prettier.
 
-### `npm run generate-types`
+### `npm run codegen`
 
 Generates TypeScript Types From GraphQL schema to `src/types/graphql-types.ts` file.
+
+
+[React]: <https://react.dev/>
+[React Typescript Cheatsheet]: https://react-typescript-cheatsheet.netlify.app/docs/basic/setup
+
+[Create react app]: <https://create-react-app.dev/>
+[Typescript]: <https://www.typescriptlang.org/docs/handbook/react.html>
+[Apollo client]: <https://www.apollographql.com/docs/react/>
+[Graphql]: <https://graphql.org/>
+[Material UI]: <https://mui.com/material-ui/getting-started/overview/>
+[Codegen]: <https://the-guild.dev/graphql/codegen>
