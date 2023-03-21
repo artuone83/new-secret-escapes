@@ -10,6 +10,7 @@ import {
 } from "@mui/material";
 import { Link } from "react-router-dom";
 import { Sale } from "generated";
+import { ROUTER_PATHS } from "router";
 
 interface MainMediaCardProps extends Partial<Sale> {
   fullWidth?: boolean;
@@ -28,7 +29,7 @@ const DefaultActions: FC<{ id: string }> = ({ id }) => {
         Share
       </Button>
       <Button size="small">
-        <Link to={`/sale/${id}`}>Learn More</Link>
+        <Link to={ROUTER_PATHS.detailsById(id)}>Learn More</Link>
       </Button>
     </>
   );

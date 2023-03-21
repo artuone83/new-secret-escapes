@@ -3,6 +3,7 @@ import { Box, Button, TextField } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { ApolloQueryError, Loading } from "components";
 import { Maybe, Sale, useSaleSearchQuery } from "generated";
+import { ROUTER_PATHS } from "router";
 
 export interface LocationState {
   resultsList: Maybe<Omit<Sale, "type">>[];
@@ -28,7 +29,7 @@ export const Search: FC = () => {
         resultCount: data?.saleSearch?.resultCount,
       };
 
-      navigate(`/search?query=${search}`, {
+      navigate(`${ROUTER_PATHS.SEARCH}?query=${search}`, {
         state,
       });
     },
