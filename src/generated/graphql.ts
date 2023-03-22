@@ -888,6 +888,8 @@ export type Prices = {
   pricingRules?: Maybe<PricingRules>;
   /** The hotel rate, without any discounts */
   rackRate?: Maybe<Price>;
+  /** Sale price with flights (H+) */
+  withFlights?: Maybe<WithFlightsPrice>;
 };
 
 export type PricingRules = {
@@ -1325,6 +1327,18 @@ export type UpcomingSalesResultsSalesArgs = {
   offset?: InputMaybe<Scalars["Int"]>;
 };
 
+export type WithFlightsPrice = {
+  __typename?: "WithFlightsPrice";
+  /** Departure airport code for price */
+  departureAirportCode?: Maybe<Scalars["String"]>;
+  /** Departure airport name for price */
+  departureAirportName?: Maybe<Scalars["String"]>;
+  /** duration for price */
+  duration?: Maybe<Scalars["Int"]>;
+  /** Price for an offer */
+  forDisplay?: Maybe<Scalars["String"]>;
+};
+
 export type SaleDetailsQueryVariables = Exact<{
   saleId: Scalars["String"];
 }>;
@@ -1352,6 +1366,8 @@ export type SaleSearchQueryVariables = Exact<{
   travelTypes?: InputMaybe<
     Array<InputMaybe<Scalars["String"]>> | InputMaybe<Scalars["String"]>
   >;
+  limit?: InputMaybe<Scalars["Int"]>;
+  offset?: InputMaybe<Scalars["Int"]>;
 }>;
 
 export type SaleSearchQuery = {
@@ -1444,10 +1460,15 @@ export type SaleDetailsQueryResult = Apollo.QueryResult<
   SaleDetailsQueryVariables
 >;
 export const SaleSearchDocument = gql`
-  query SaleSearch($query: String, $travelTypes: [String]) {
+  query SaleSearch(
+    $query: String
+    $travelTypes: [String]
+    $limit: Int = 10
+    $offset: Int = 0
+  ) {
     saleSearch(query: $query, travelTypes: $travelTypes) {
       resultCount
-      sales(limit: 10, offset: 0) {
+      sales(limit: $limit, offset: $offset) {
         id
         editorial {
           title
@@ -1475,6 +1496,8 @@ export const SaleSearchDocument = gql`
  *   variables: {
  *      query: // value for 'query'
  *      travelTypes: // value for 'travelTypes'
+ *      limit: // value for 'limit'
+ *      offset: // value for 'offset'
  *   },
  * });
  */
