@@ -46,7 +46,7 @@ export const Results: FC = () => {
 
   return (
     <>
-      <MainHeading size="s">{heading}</MainHeading>
+      <MainHeading>{heading}</MainHeading>
       {!noResults ? (
         <Box
           sx={{
