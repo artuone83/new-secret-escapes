@@ -68,7 +68,7 @@ export const MediaCard: FC<MainMediaCardProps> = ({
           <Box dangerouslySetInnerHTML={{ __html: ownInnerHtml }} />
         )}
       </CardContent>
-      {actions && <CardActions>{actions(id || "")}</CardActions>}
+      {actions && <CardActions>{actions(id as string)}</CardActions>}
     </Card>
   );
 };
